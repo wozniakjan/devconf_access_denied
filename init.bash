@@ -8,6 +8,10 @@ usage() {
     echo "Usage: [-u|--user=<.*>] [-h|--help]"
 }
 
+info() { 
+	echo "$@" 1>&2; 
+}
+
 TEMP=`getopt -o u:h --long user:,help -n 'init' -- "$@"`
 eval set -- "$TEMP"
 
@@ -26,23 +30,26 @@ if [[ -z $USER ]]; then
 	exit 1
 fi
 
-echo "adding user $USER"
-useradd -g users -d /home/$USER -s /bin/bash -p $(echo  $USER | openssl passwd -1 -stdin) $USER > /tmp/log_$USER.txt
+info "adding user $USER"
+useradd -g users -d /home/$USER -s /bin/bash -p $(echo  $USER | openssl passwd -1 -stdin) $USER
 
-echo "initializing oc user and project"
-oc login -u $USER -p $USER >> /tmp/log_$USER.txt
-oc new-project ${USER}-project >> /tmp/log_$USER.txt
+info "initializing oc user and project"
+oc login -u $USER -p $USER 
+oc new-project ${USER}-project 
+oc login -u system:admin 
+oc adm policy add-scc-to-user hostaccess $USER
+oc login -u $USER -p $USER 
 
-echo "initializing fs"
-mkdir -p /home/$USER/pv/{1..15} >> /tmp/log_$USER.txt
+info "initializing fs"
+mkdir -p /home/$USER/pv/{1..15} 
 for f in {1..15}; do
-    /root/init/$f/init.bash >> /tmp/log_$USER.txt
+    /root/init/$f/init.bash 
 
 done
 
-echo "creating oc objects"
+info "creating oc objects"
 for f in {1..15}; do
-    cd /root/init/$f >> /tmp/log_$USER.txt
-    ./oc_init.bash >> /tmp/log_$USER.txt
-    cd - >> /tmp/log_$USER.txt
+    cd /root/init/$f 
+    ./oc_init.bash 
+    cd - 
 done
