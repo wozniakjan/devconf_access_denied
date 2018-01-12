@@ -1,0 +1,16 @@
+kind: Pod 
+apiVersion: v1
+metadata:
+  name: pod1
+spec:
+  containers:
+    - name: c1 
+      image: c1
+      volumeMounts:
+      - mountPath: "/pv"
+        name: v1
+  volumes:
+    - name: v1
+      hostPath:
+        type: Directory
+        #path: /home/$USER/pv/1
