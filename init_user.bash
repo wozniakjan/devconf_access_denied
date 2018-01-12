@@ -52,5 +52,5 @@ done
 
 info "creating oc objects"
 for f in {1..15}; do
-    ./root/init/$f/oc_init.bash 
+    /root/init/$f/oc_init.bash 
 done
