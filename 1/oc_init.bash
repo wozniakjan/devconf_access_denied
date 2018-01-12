@@ -1,4 +1,3 @@
 set -e
 
-docker build . -t c1
-oc create -f <(cat pod.yaml <(echo "        path: /home/$USER/pv/1"))
+oc create -f <(cat /root/init/1/pod.yaml <(echo "        path: /home/$USER/pv/1"))

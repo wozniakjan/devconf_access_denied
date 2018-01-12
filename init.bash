@@ -1,55 +1,12 @@
-#!/bin/bash
+./init_docker.bash
 
-set -e
-
-trap 'echo done; oc login -u system:admin > /dev/null; cd ~/init > /dev/null' 'EXIT' 
-
-usage() {
-    echo "Usage: [-u|--user=<.*>] [-h|--help]"
-}
-
-info() { 
-	echo "$@" 1>&2; 
-}
-
-TEMP=`getopt -o u:h --long user:,help -n 'init' -- "$@"`
-eval set -- "$TEMP"
-
-USER=""
-while true ; do
-    case "$1" in
-        -u|--user) export USER="$2" ; shift 2 ;;
-        -h|--help) usage ; shift 1 ;;
-        --) shift ; break ;;
-        *) usage ; exit 1 ;;
-    esac
-done
-
-if [[ -z $USER ]]; then
-	usage
-	exit 1
-fi
-
-info "adding user $USER"
-useradd -g users -d /home/$USER -s /bin/bash -p $(echo  $USER | openssl passwd -1 -stdin) $USER
-
-info "initializing oc user and project"
-oc login -u $USER -p $USER 
-oc new-project ${USER}-project 
-oc login -u system:admin 
-oc adm policy add-scc-to-user hostaccess $USER
-oc login -u $USER -p $USER 
-
-info "initializing fs"
-mkdir -p /home/$USER/pv/{1..15} 
-for f in {1..15}; do
-    /root/init/$f/init.bash 
-
-done
-
-info "creating oc objects"
-for f in {1..15}; do
-    cd /root/init/$f 
-    ./oc_init.bash 
-    cd - 
-done
+./init_user.bash -u devconf1 -p 5be4c7
+./init_user.bash -u devconf2 -p c5981f
+./init_user.bash -u devconf3 -p 9b674f
+./init_user.bash -u devconf4 -p 7a90d3
+./init_user.bash -u devconf5 -p e56657
+./init_user.bash -u devconf6 -p 5db6c4
+./init_user.bash -u devconf7 -p b9f05c
+./init_user.bash -u devconf8 -p 54f05e
+./init_user.bash -u devconf9 -p cebb66
+./init_user.bash -u devconf10 -p 886221

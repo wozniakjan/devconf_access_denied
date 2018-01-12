@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: c1 
-      image: c1
+      image: local-reg:5000/devconf/c1:latest
       volumeMounts:
       - mountPath: "/pv"
         name: v1
