@@ -1,3 +1,5 @@
+set -e
+
 ./init_docker.bash
 
 ./init_user.bash -u devconf1 -p 5be4c7
