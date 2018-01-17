@@ -38,6 +38,7 @@ info "adding user $USER"
 useradd -g users -d /home/$USER -s /bin/bash -p $(echo  $PASSWORD | openssl passwd -1 -stdin) $USER
 
 info "initializing oc user and project"
+htpasswd -b /root/pwd $USER $PASSWORD
 oc login -u $USER -p $PASSWORD 
 oc new-project ${USER}-project 
 oc login -u system:admin 
