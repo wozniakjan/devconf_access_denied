@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+    echo Needs to know which pod to retry
+fi
+
+if oc get pods $1 > /dev/null; then
+    if [[ $1 == pod1 ]]; then
+        oc get pod $1 -o yaml | oc replace --force -f -
+    else
+        oc rollout latest deployment/$1
+    fi
+fi
