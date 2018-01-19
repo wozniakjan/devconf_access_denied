@@ -1,3 +1,3 @@
 FROM centos:centos7
 
-CMD sleep 5000
+CMD echo success > /pv/file ; while :; do sleep infinity; done
