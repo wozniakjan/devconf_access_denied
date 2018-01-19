@@ -8,7 +8,7 @@ info() {
 
 info Building images
 for f in {1..15}; do
-    cd /root/init/$f
+    cd $f
     for d in Dockerfile*; do
         if [[ -f $d ]]; then
             info Building local-reg:5000/devconf/c$f$tag

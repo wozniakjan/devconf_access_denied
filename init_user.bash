@@ -43,7 +43,8 @@ oc login -u $user -p $pass
 oc new-project ${user}-project 
 oc login -u system:admin 
 oc adm policy add-scc-to-user hostaccess $user
-oc login -u $user -p $pass 
+oc login -u $user -p $pass
+su -c "oc login devconf:8443 -u $user -p $pass" - $user
 
 info "initializing tasks"
 mkdir -p /home/$user/pv/{1..15} 
