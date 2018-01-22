@@ -2,6 +2,7 @@ set -e
 
 # SElinux securityContext level and categories missing
 #
+# oc adm policy add-scc-to-user privileged system:serviceaccount:${user}-project:default
 # oc edit deployment
 #   securityContext:
 #     seLinuxOptions:
