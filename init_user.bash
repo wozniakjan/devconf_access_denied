@@ -47,7 +47,7 @@ oc login -u $user -p $pass
 su -c "oc login devconf:8443 -u $user -p $pass" - $user
 
 info "initializing tasks"
-mkdir -p /home/$user/pv/{1..15} 
-for f in {1..15}; do
+mkdir -p /home/$user/pv/{1..5} 
+for f in {1..5}; do
     /root/init/$f/init.bash 
 done

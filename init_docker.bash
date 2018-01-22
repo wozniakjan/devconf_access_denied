@@ -7,7 +7,7 @@ info() {
 }
 
 info Building images
-for f in {1..15}; do
+for f in {1..5}; do
     cd $f
     for d in Dockerfile*; do
         if [[ -f $d ]]; then
