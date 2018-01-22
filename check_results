@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function out() {
+  echo NAME STATUS
+  for i in {1..5}; do
+    logs=$(oc logs pod$i 2>&1)
+    if [[ -z $logs ]]; then
+      echo pod$i ok
+    else
+      echo pod$i fail 
+    fi
+  done
+}
+
+out | column -t
