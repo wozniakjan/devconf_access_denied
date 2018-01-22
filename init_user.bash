@@ -43,6 +43,8 @@ oc login -u $user -p $pass
 oc new-project ${user}-project 
 oc login -u system:admin 
 oc adm policy add-scc-to-user hostaccess $user
+oc adm policy add-cluster-role-to-user scc-editor
+oc adm policy add-cluster-role-to-user scc-editor2
 oc login -u $user -p $pass
 su -c "oc login devconf:8443 -u $user -p $pass" - $user
 
