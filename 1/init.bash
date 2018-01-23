@@ -5,6 +5,8 @@ set -e
 # the container tries to write to 644 file
 # has matching GID but not matching UID as underlying system
 # simple fix is to change permissions to 664
+# 
+# chmod 664 /home/ux7/pv/1/file
 
 # fs
 touch /home/$user/pv/1/file

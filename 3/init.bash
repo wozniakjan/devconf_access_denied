@@ -6,7 +6,12 @@ set -e
 # oc edit deployment
 #   securityContext:
 #     seLinuxOptions:
-#       level: s0,c0,c5
+#       level: "s0:c0,c5"
+#
+# or
+#
+# chcat -- +cX /home/$user/pv/3
+# chcat -- +cY /home/$user/pv/3/file 
 
 # fs
 touch /home/$user/pv/3/file

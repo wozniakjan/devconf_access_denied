@@ -1,16 +1,17 @@
 #!/bin/bash
 
 function out() {
-  echo NAME STATUS
+  echo NAME STATUS DATA
   pods=( `oc get pods | awk 'NR>1{print($1)}'` )
   for i in {1..5}; do
     pod=""
     for p in "${pods[@]}"; do if [[ $p =~ task$i ]]; then pod=$p; fi done
     logs=$(oc logs $pod 2>&1)
+    data=$(cat /home/$USER/pv/$i/file)
     if [[ -z $logs ]]; then
-      echo task$i ok
+      echo task$i ok $data
     else
-      echo task$i fail
+      echo task$i fail $data
     fi
   done
 }
