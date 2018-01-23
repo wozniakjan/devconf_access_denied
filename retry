@@ -1,13 +1,20 @@
 #!/bin/bash
 
-if [[ -z $1 ]]; then
-    echo Needs to know which pod to retry
+if [[ ! $1 =~ task[1..5] ]]; then
+    echo "$1 is not a known task"
+    exit 1
 fi
 
-if oc get pods $1 > /dev/null; then
-    if [[ $1 == pod1 ]]; then
-        oc get pod $1 -o yaml | oc replace --force -f -
-    else
-        oc rollout latest deployment/$1
-    fi
+if oc get deployment $1 > /dev/null 2> /dev/null; then
+    oc rollout pause $1
+    oc rollout resume $1
+    exit 0
 fi
+
+if oc get pods $1 > /dev/null 2> /dev/null; then
+    oc get pod $1 -o yaml | oc replace --force -f -
+    exit 0
+fi
+
+echo "Not sure what to do with $1"
+exit 1
