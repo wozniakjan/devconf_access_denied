@@ -1,6 +1,10 @@
 set -e
 
 #visudo %users  ALL=(root)      NOPASSWD: /usr/bin/chcon
+#/etc/origin/node/node-config.yaml
+#kubeletArguments:
+#  pods-per-core:
+#    - "100"
 
 oc create clusterrole scc-editor --verb=create,delete,get,list,update,watch --resource=securitycontextconstraints
 oc create clusterrole scc-editor2 --verb=create,delete,get,list,update,watch --resource=securitycontextconstraints.security.openshift.io

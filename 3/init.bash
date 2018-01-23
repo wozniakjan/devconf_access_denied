@@ -10,8 +10,8 @@ set -e
 #
 # or
 #
-# chcat -- +cX /home/$user/pv/3
-# chcat -- +cY /home/$user/pv/3/file 
+# chcat -- -c0 /home/$user/pv/3
+# chcat -- -c5 /home/$user/pv/3
 
 # fs
 touch /home/$user/pv/3/file
