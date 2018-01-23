@@ -3,11 +3,11 @@
 function out() {
   echo NAME STATUS
   for i in {1..5}; do
-    logs=$(oc logs pod$i 2>&1)
+    logs=$(oc logs task$i 2>&1)
     if [[ -z $logs ]]; then
-      echo pod$i ok
+      echo task$i ok
     else
-      echo pod$i fail 
+      echo task$i fail 
     fi
   done
 }
