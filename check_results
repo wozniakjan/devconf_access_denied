@@ -2,12 +2,15 @@
 
 function out() {
   echo NAME STATUS
+  pods=( `oc get pods | awk 'NR>1{print($1)}'` )
   for i in {1..5}; do
-    logs=$(oc logs task$i 2>&1)
+    pod=""
+    for p in "${pods[@]}"; do if [[ $p =~ task$i ]]; then pod=$p; fi done
+    logs=$(oc logs $pod 2>&1)
     if [[ -z $logs ]]; then
       echo task$i ok
     else
-      echo task$i fail 
+      echo task$i fail
     fi
   done
 }
