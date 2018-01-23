@@ -1,0 +1,17 @@
+kind: Pod 
+apiVersion: v1
+metadata:
+  name: pod4
+spec:
+  containers:
+    - name: c1 
+      image: local-reg:5000/devconf/c1:latest
+      volumeMounts:
+      - mountPath: "/pv"
+        name: v1
+  volumes:
+    - name: v1
+      hostPath:
+        type: Directory
+        #path: /home/$user/pv/4
+
