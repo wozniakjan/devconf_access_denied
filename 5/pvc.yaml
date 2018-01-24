@@ -9,4 +9,5 @@ spec:
     requests:
       storage: 1Gi
   selector:
-    user: ${user}
+    matchLabels:
+      user: ${user}
