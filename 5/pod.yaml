@@ -1,0 +1,15 @@
+kind: Pod 
+apiVersion: v1
+metadata:
+  name: task1
+spec:
+  containers:
+    - name: c1 
+      image: local-reg:5000/devconf/c1:latest
+      volumeMounts:
+      - mountPath: "/pv"
+        name: v1
+  volumes:
+    - name: v1
+      persistentVolumeClaim:
+        claimName: pvc

@@ -6,8 +6,7 @@ if [[ ! $1 =~ task[1-5] ]]; then
 fi
 
 if oc get deployment $1 > /dev/null 2> /dev/null; then
-    oc rollout pause deployment/$1
-    oc rollout resume deployment/$1
+    oc get deployment $1 -o yaml | oc replace --force -f -
     exit 0
 fi
 
