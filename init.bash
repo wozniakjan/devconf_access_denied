@@ -1,6 +1,6 @@
 set -e
 
-#visudo %users  ALL=(root)      NOPASSWD: /usr/bin/chcon
+#visudo %users  ALL=(root)      NOPASSWD: /usr/bin/chcon, /usr/bin/chcat
 #/etc/origin/node/node-config.yaml
 #kubeletArguments:
 #  pods-per-core:
@@ -8,6 +8,7 @@ set -e
 
 oc create clusterrole scc-editor --verb=create,delete,get,list,update,watch --resource=securitycontextconstraints
 oc create clusterrole scc-editor2 --verb=create,delete,get,list,update,watch --resource=securitycontextconstraints.security.openshift.io
+oc create clusterrole pv-view --verb=get,list --resource=persistentvolumes
 
 ./init_docker.bash
 
