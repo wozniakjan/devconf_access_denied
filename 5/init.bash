@@ -2,6 +2,11 @@ set -e
 
 # PV mismatch
 #
+# PV storage capacity and PVC request capacity do not match
+# oc get pvc -o yaml > pvc.yaml
+# edit request -> capacity
+# cat pvc.yaml | oc replace --force -f -
+# retry task5
 
 # fs
 touch /home/$user/pv/5/file
