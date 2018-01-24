@@ -12,7 +12,9 @@ chmod 664 /home/$user/pv/5/file
 chcon -u system_u -r object_r -t svirt_sandbox_file_t /home/$user/pv/5
 chcon -u system_u -r object_r -t svirt_sandbox_file_t /home/$user/pv/5/file
 
-# create objects
-oc create -f <(cat /root/init/5/pv.yaml <(echo "    path: /home/$user/pv/5"))
-oc create -f <(cat /root/init/5/pvc.yaml)
-oc create -f <(cat /root/init/5/pod.yaml)
+# create objects 
+oc login -u system:admin 
+oc create -f <(cat /root/init/5/pv.yaml | sed "s/\${user}/${user}/g")
+oc login -u $user -p $pass
+oc create -f <(cat /root/init/5/pvc.yaml | sed "s/\${user}/${user}/g")
+oc create -f /root/init/5/pod.yaml

@@ -11,4 +11,4 @@ chown $user /home/$user/pv/4/file
 chmod 664 /home/$user/pv/4/file
 
 # create pod
-oc create -f <(cat /root/init/4/pod.yaml <(echo "        path: /home/$user/pv/4"))
+oc create -f <(cat /root/init/4/pod.yaml | sed "s/\${user}/${user}/g")

@@ -14,4 +14,4 @@ chcon -u system_u -r object_r -t svirt_sandbox_file_t /home/$user/pv/2
 chcon -u system_u -r object_r -t svirt_sandbox_file_t /home/$user/pv/2/file
 
 # create dc 
-oc create -f <(cat /root/init/2/dc.yaml <(echo "          path: /home/$user/pv/2"))
+oc create -f <(cat /root/init/2/dc.yaml | sed "s/\${user}/${user}/g")

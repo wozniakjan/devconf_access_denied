@@ -13,5 +13,4 @@ spec:
     - name: v1
       hostPath:
         type: Directory
-        #path: /home/$user/pv/4
-
+        path: /home/${user}/pv/4
